@@ -20,6 +20,11 @@ void read(FILE *input, char *buffer)
 	while ((line_length = getline(&buffer, &length, input)) != -1)
 	{
 		token = strtok(buffer, "\n\t ");
+		if (!token)
+		{
+			free_stack();
+			return;
+		}
 		for (i = 0; token; i++)
 		{
 			world.commands[i] = token;
