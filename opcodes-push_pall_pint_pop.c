@@ -23,7 +23,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 	}
 
 	new->next = NULL;
-	if (isdigit(world.commands[1][0]) == 0)
+	if (isdigit(world.commands[1][0]) == 0 && world.commands[1][0] != '-')
 	{
 		free(new);
 		free_stack();
@@ -31,7 +31,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	for (i = 0; world.commands[1][i]; i++)
+	for (i = 1; world.commands[1][i]; i++)
 	{
 		if (isdigit(world.commands[1][i]) == 0)
 		{
