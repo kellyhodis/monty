@@ -49,7 +49,7 @@ typedef struct struct_s
 
 extern struct_t world;
 
-int valid_check(char *command, unsigned int line_number);
+void read(FILE *input, char *buffer);
 int get_op(stack_t **stack, unsigned int line_number);
 void op_push(stack_t **stack, unsigned int line_number);
 void op_pall(stack_t **stack, unsigned int line_number);
