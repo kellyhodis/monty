@@ -66,8 +66,9 @@ void op_pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *run;
 
+	(void)stack;
 	(void)line_number;
-	run = *stack;
+	run = world.stack;
 	while (run)
 	{
 		printf("%d\n", run->n);
@@ -105,15 +106,20 @@ void op_pint(stack_t **stack, unsigned int line_number)
 
 void op_pop(stack_t **stack, unsigned int line_number)
 {
-	if (*stack)
+	(void)stack;
+	if (world.stack)
 	{
-		if ((*stack)->prev)
+		if ((world.stack)->prev)
 		{
-			*stack = (*stack)->prev;
-			free((*stack)->next);
+			world.stack = (world.stack)->prev;
+			free((world.stack)->next);
+			(world.stack)->next = NULL;
 		}
 		else
-			free(*stack);
+		{
+			free(world.stack);
+			world.stack = NULL;
+		}
 	}
 	else
 	{
