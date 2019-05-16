@@ -21,7 +21,6 @@ void free_stack(void)
 
 /**
 * add_node - adds a node to a stack
-* @stack: stack to add node to
 * @n: data to put into new node
 *
 * Return: address of node
@@ -51,7 +50,6 @@ void add_node(int n)
 
 /**
 * remove_node - removes a node from top of stack
-* @stack: stack from which to remove node
 *
 * Return: address of new top
 */

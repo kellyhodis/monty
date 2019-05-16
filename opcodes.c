@@ -2,8 +2,6 @@
 struct_t world;
 /**
 * get_op - calls the correct function
-* @commands: array of commands
-* @stack: stack to manipulate
 * @line_number: current line number in program
 *
 * Return: 0

@@ -25,7 +25,7 @@ void op_swap(stack_t **stack, unsigned int line_number)
 /**
 * op_add - adds the top two elements of the stack
 * @stack: stack to add elements of
-* #line_number: current line number of program
+* @line_number: current line number of program
 *
 * Return: nothing
 */

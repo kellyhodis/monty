@@ -24,7 +24,7 @@ void read(FILE *input, char *buffer)
 		{
 			continue;
 		}
-		for (i = 0; token; i++)
+		for (i = 0; token && i < 2; i++)
 		{
 			world.commands[i] = token;
 			token = strtok(NULL, "\n\t ");
@@ -35,7 +35,6 @@ void read(FILE *input, char *buffer)
 		for (i = 0; i < 1024; i++)
 			buffer[i] = '\0';
 	}
-	free_stack();
 }
 
 /**
@@ -71,7 +70,8 @@ int main(int argc, char **argv)
 		for (i = 0; i < 1024; i++)
 			buffer[i] = '\0';
 		read(input, buffer);
+		fclose(input);
+		free_stack();
 	}
-	fclose(world.input);
 	return (0);
 }
