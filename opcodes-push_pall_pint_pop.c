@@ -47,7 +47,10 @@ void op_push(stack_t **stack, unsigned int line_number)
 	if (!world.stack)
 		new->prev = NULL;
 	else
+	{
 		new->prev = world.stack;
+		new->prev->next = new;
+	}
 	world.stack = new;
 }
 
