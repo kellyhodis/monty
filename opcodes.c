@@ -27,6 +27,8 @@ int get_op(unsigned int line_number)
 
 	for (i = 0; known[i].opcode; i++)
 	{
+		if (strcmp(world.commands[0], "push") == 0 && world.commands[1] == NULL)
+			world.commands[1] = "x";
 		if (world.commands[0] && strcmp(world.commands[0], known[i].opcode) == 0)
 		{
 			known[i].f(&(world.stack), line_number);
