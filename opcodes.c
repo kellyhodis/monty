@@ -22,6 +22,7 @@ int get_op(unsigned int line_number)
 		{"mul", op_mul},
 		{"mod", op_mod},
 		{"pchar", op_pchar},
+		{"pstr", op_pstr},
 		{NULL, NULL}
 	};
 	int i;
