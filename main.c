@@ -19,14 +19,14 @@ void read(FILE *input, char *buffer)
 	world.stack = NULL;
 	while ((line_length = getline(&buffer, &length, input)) != -1)
 	{
-		token = strtok(buffer, "\n\t ");
+		token = strtok(buffer, "\n\t\r\v\f ");
 		line_num++;
 		if (!token)
 			continue;
 		for (i = 0; token && i < 2; i++)
 		{
 			world.commands[i] = token;
-			token = strtok(NULL, "\n\t ");
+			token = strtok(NULL, "\n\t\r\v\f ");
 		}
 		world.commands[i] = NULL;
 		get_op(line_num);
