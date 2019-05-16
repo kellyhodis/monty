@@ -9,9 +9,9 @@ struct_t world;
 * Return: 0
 */
 
-int get_op(stack_t **stack, unsigned int line_number)
+int get_op(unsigned int line_number)
 {
-	instruction_t known_instructions[] = {
+	instruction_t known[] = {
 		{"push", op_push},
 		{"pall", op_pall},
 		{"pint", op_pint},
@@ -19,22 +19,27 @@ int get_op(stack_t **stack, unsigned int line_number)
 		{"swap", op_swap},
 		{"add", op_add},
 		{"nop", op_nop},
+		{"sub", op_sub},
+		{"div", op_div},
+		{"mul", op_mul},
+		{"mod", op_mod},
 		{NULL, NULL}
 	};
 	int i;
 
-	for (i = 0; known_instructions[i].opcode; i++)
+	for (i = 0; known[i].opcode; i++)
 	{
-		if (strcmp(world.commands[0], known_instructions[i].opcode) == 0)
+		if (world.commands[0] && strcmp(world.commands[0], known[i].opcode) == 0)
 		{
-			known_instructions[i].f(stack, line_number);
+			known[i].f(&(world.stack), line_number);
 			return (0);
 		}
 	}
 	{
 		fprintf(stderr, "L%d: unknown instruction %s",
 			line_number, world.commands[0]);
-		/* free stack elements if they exist */
+		free_stack();
+		fclose(world.input);
 		exit(EXIT_FAILURE);
 	}
 	return (0);

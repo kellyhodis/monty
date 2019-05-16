@@ -11,13 +11,13 @@ struct_t world;
 
 void read(FILE *input, char *buffer)
 {
-	size_t i, length = 0;
+	size_t i, length = 1024;
 	char *token;
-	int line_num = 0, line_length = 0;
-	stack_t *stack = NULL;
+	int line_num = 0;
+	ssize_t line_length = 0;
 
-	line_length = getline(&buffer, &length, input);
-	while (line_length >= 0)
+	world.stack = NULL;
+	while ((line_length = getline(&buffer, &length, input)) != -1)
 	{
 		token = strtok(buffer, "\n\t ");
 		for (i = 0; token; i++)
@@ -27,11 +27,11 @@ void read(FILE *input, char *buffer)
 		}
 		world.commands[i] = NULL;
 		line_num++;
-		get_op(&stack, line_num);
-		free(buffer);
-		buffer = NULL;
-		line_length = getline(&buffer, &length, input);
+		get_op(line_num);
+		for (i = 0; i < 1024; i++)
+			buffer[i] = '\0';
 	}
+	free_stack();
 }
 
 /**
@@ -44,9 +44,9 @@ void read(FILE *input, char *buffer)
 
 int main(int argc, char **argv)
 {
-	FILE *input;
-	char *buffer = NULL;
+	char buffer[1024];
 	int i;
+	FILE *input;
 
 	if (argc == 1)
 	{
@@ -55,16 +55,19 @@ int main(int argc, char **argv)
 	}
 	if (argc > 1)
 	{
-		input = fopen(argv[1], "rb");
-		if (!input)
+		input = fopen(argv[1], "r");
+		if (input == NULL)
 		{
 			fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 			exit(EXIT_FAILURE);
 		}
 		for (i = 0; i < 15; i++)
 			world.commands[i] = NULL;
+		world.input = input;
+		for (i = 0; i < 1024; i++)
+			buffer[i] = '\0';
 		read(input, buffer);
 	}
-	fclose(input);
+	fclose(world.input);
 	return (0);
 }

@@ -38,6 +38,8 @@ typedef struct instruction_s
 /**
  * struct struct_s - struct containing globally needed variables
  * @commands: array of commands
+ * @stack: stack
+ * @input: file input
  *
  * Description: global variables
  */
@@ -45,12 +47,14 @@ typedef struct instruction_s
 typedef struct struct_s
 {
 	char *commands[10];
+	stack_t *stack;
+	FILE *input;
 } struct_t;
 
 extern struct_t world;
 
 void read(FILE *input, char *buffer);
-int get_op(stack_t **stack, unsigned int line_number);
+int get_op(unsigned int line_number);
 void op_push(stack_t **stack, unsigned int line_number);
 void op_pall(stack_t **stack, unsigned int line_number);
 void op_pint(stack_t **stack, unsigned int line_number);
@@ -62,4 +66,9 @@ void op_sub(stack_t **stack, unsigned int line_number);
 void op_div(stack_t **stack, unsigned int line_number);
 void op_mul(stack_t **stack, unsigned int line_number);
 void op_mod(stack_t **stack, unsigned int line_number);
+
+void add_node(int n);
+void remove_node();
+void free_stack();
+
 #endif /* MONTY_H */
