@@ -11,15 +11,37 @@ struct_t world;
 void op_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
+	int i;
 
-	(void)line_number;
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
-		/* error message for malloc */
+		free_stack();
+		fclose(world.input);
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
 	}
 
 	new->next = NULL;
+	if (isdigit(world.commands[1][0]) == 0)
+	{
+		free(new);
+		free_stack();
+		fclose(world.input);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	for (i = 0; world.commands[1][i]; i++)
+	{
+		if (isdigit(world.commands[1][i]) == 0)
+		{
+			free(new);
+			free_stack();
+			fclose(world.input);
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+	}
 	new->n = atoi(world.commands[1]);
 	if (!*stack)
 		new->prev = NULL;
