@@ -20,17 +20,15 @@ void read(FILE *input, char *buffer)
 	while ((line_length = getline(&buffer, &length, input)) != -1)
 	{
 		token = strtok(buffer, "\n\t ");
+		line_num++;
 		if (!token)
-		{
 			continue;
-		}
 		for (i = 0; token && i < 2; i++)
 		{
 			world.commands[i] = token;
 			token = strtok(NULL, "\n\t ");
 		}
 		world.commands[i] = NULL;
-		line_num++;
 		get_op(line_num);
 		for (i = 0; i < 1024; i++)
 			buffer[i] = '\0';
