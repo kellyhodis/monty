@@ -48,14 +48,14 @@ void op_add(stack_t **stack, unsigned int line_number)
 }
 
 /**
-* nop - does nothing
+* op_nop - does nothing
 * @stack: stack on which nothing is done
 * @line_number: current line number of program
 *
 * Return: nothing
 */
 
-void nop(stack_t **stack, unsigned int line_number)
+void op_nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;

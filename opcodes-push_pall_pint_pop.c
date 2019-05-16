@@ -1,5 +1,5 @@
 #include "monty.h"
-
+struct_t world;
 /**
 * op_push - pushes an element to the stack
 * @stack: stack to push element to
@@ -12,6 +12,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
 
+	(void)line_number;
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
@@ -19,7 +20,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 	}
 
 	new->next = NULL;
-	new->n = line_number;
+	new->n = atoi(world.commands[1]);
 	if (!*stack)
 		new->prev = NULL;
 	else
@@ -79,7 +80,7 @@ void op_pop(stack_t **stack, unsigned int line_number)
 {
 	if (*stack)
 	{
-		if (*stack->prev)
+		if ((*stack)->prev)
 		{
 			*stack = (*stack)->prev;
 			free((*stack)->next);

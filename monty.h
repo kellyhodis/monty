@@ -35,8 +35,22 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct struct_s - struct containing globally needed variables
+ * @commands: array of commands
+ *
+ * Description: global variables
+ */
+
+typedef struct struct_s
+{
+	char *commands[10];
+} struct_t;
+
+extern struct_t world;
+
 int valid_check(char *command, unsigned int line_number);
-int get_op(char *commands[], stack_t **stack, unsigned int line_number);
+int get_op(stack_t **stack, unsigned int line_number);
 void op_push(stack_t **stack, unsigned int line_number);
 void op_pall(stack_t **stack, unsigned int line_number);
 void op_pint(stack_t **stack, unsigned int line_number);

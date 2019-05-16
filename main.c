@@ -1,13 +1,15 @@
 #include "monty.h"
+struct_t world;
+
 /**
-* read_line - open file and read content into a buffer
-* @input_file: filename
+* read - open file and read content into a buffer
+* @input: filename
 * @buffer: to read the contents of file
 *
 * Return: pointer to line
 */
 
-void read(FILE *input, char *buffer, char *commands[])
+void read(FILE *input, char *buffer)
 {
 	size_t i, length = 0;
 	char *token;
@@ -20,12 +22,12 @@ void read(FILE *input, char *buffer, char *commands[])
 		token = strtok(buffer, "\n\t ");
 		for (i = 0; token; i++)
 		{
-			commands[i] = token;
+			world.commands[i] = token;
 			token = strtok(NULL, "\n\t ");
 		}
-		commands[i] = NULL;
+		world.commands[i] = NULL;
 		line_num++;
-		get_op(commands, &stack, line_num);
+		get_op(&stack, line_num);
 		free(buffer);
 		buffer = NULL;
 		line_length = getline(&buffer, &length, input);
@@ -44,7 +46,7 @@ int main(int argc, char **argv)
 {
 	FILE *input;
 	char *buffer = NULL;
-	char *commands[30];
+	int i;
 
 	if (argc == 1)
 	{
@@ -59,8 +61,9 @@ int main(int argc, char **argv)
 			fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 			exit(EXIT_FAILURE);
 		}
-
-		read(input, buffer, commands);
+		for (i = 0; i < 15; i++)
+			world.commands[i] = NULL;
+		read(input, buffer);
 	}
 	fclose(input);
 	return (0);
