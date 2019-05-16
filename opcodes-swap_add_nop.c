@@ -10,14 +10,20 @@
 
 void op_swap(stack_t **stack, unsigned int line_number)
 {
-	if ((*stack) && (*stack)->prev)
+	int hold;
+
+	(void)stack;
+	if ((world.stack) && (world.stack)->prev)
 	{
-		/* swap elements */
+		hold = (world.stack)->n;
+		(world.stack)->n = (world.stack)->prev->n;
+		(world.stack)->prev->n = hold; 
 	}
 	else
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-		/* free stack element if there was one */
+		fclose(world.input);
+		free_stack();
 		exit(EXIT_FAILURE);
 	}
 }
