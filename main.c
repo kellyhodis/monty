@@ -22,8 +22,7 @@ void read(FILE *input, char *buffer)
 		token = strtok(buffer, "\n\t ");
 		if (!token)
 		{
-			free_stack();
-			return;
+			continue;
 		}
 		for (i = 0; token; i++)
 		{
