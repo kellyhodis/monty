@@ -43,18 +43,14 @@ void op_div(stack_t **stack, unsigned int line_num)
 		free((*stack)->next);
 		(*stack)->next = NULL;
 	}
-	else if ((*stack)->n == 0)
-	{
-		fprintf(stderr, "L%d: division by zero\n", line_num);
-		free_stack();
-		fclose(world.input);
-		exit(EXIT_FAILURE);
-	}
 	else
 	{
-		fprintf(stderr, "L%d: can't div, stack too short\n", line_num);
-		fclose(world.input);
+		if (!(*stack)->prev)
+			fprintf(stderr, "L%d: can't div, stack too short\n", line_num);
+		else if ((*stack)->n == 0)
+			fprintf(stderr, "L%d: division by zero\n", line_num);
 		free_stack();
+		fclose(world.input);
 		exit(EXIT_FAILURE);
 	}
 }
