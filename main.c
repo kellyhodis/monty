@@ -29,8 +29,6 @@ void read(FILE *input, char *buffer)
 			token = strtok(NULL, "\n\t ");
 		}
 		world.commands[i] = NULL;
-		for (i = 0; world.commands[i]; i++)
-			printf("arg: %s\n", world.commands[i]);
 		get_op(line_num);
 		for (i = 0; i < 1024; i++)
 			buffer[i] = '\0';
