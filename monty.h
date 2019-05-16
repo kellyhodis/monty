@@ -68,7 +68,7 @@ void op_mul(stack_t **stack, unsigned int line_number);
 void op_mod(stack_t **stack, unsigned int line_number);
 
 void add_node(int n);
-void remove_node();
-void free_stack();
+void remove_node(void);
+void free_stack(void);
 
 #endif /* MONTY_H */
