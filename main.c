@@ -29,6 +29,8 @@ void read(FILE *input, char *buffer)
 			token = strtok(NULL, "\n\t\r\v\f ");
 		}
 		world.commands[i] = NULL;
+		if (world.commands[0][0] == '#')
+			continue;
 		get_op(line_num);
 		for (i = 0; i < 1024; i++)
 			buffer[i] = '\0';
