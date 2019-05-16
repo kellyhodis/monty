@@ -13,8 +13,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 	int i;
 
-	if (!stack)
-		return;
+	(void)stack;
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
@@ -45,11 +44,11 @@ void op_push(stack_t **stack, unsigned int line_number)
 		}
 	}
 	new->n = atoi(world.commands[1]);
-	if (!*stack)
+	if (!world.stack)
 		new->prev = NULL;
 	else
-		new->prev = *stack;
-	*stack = new;
+		new->prev = world.stack;
+	world.stack = new;
 }
 
 /**
