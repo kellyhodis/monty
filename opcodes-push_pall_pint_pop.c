@@ -85,6 +85,7 @@ void op_pint(stack_t **stack, unsigned int line_number)
 		fprintf(stdout, "%d\n", (*stack)->n);
 	else
 	{
+		fclose(world.input);
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
@@ -113,6 +114,7 @@ void op_pop(stack_t **stack, unsigned int line_number)
 	else
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		fclose(world.input);
 		exit(EXIT_FAILURE);
 	}
 }
