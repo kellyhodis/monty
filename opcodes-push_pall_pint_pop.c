@@ -13,6 +13,8 @@ void op_push(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 	int i;
 
+	if (!stack)
+		return;
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
