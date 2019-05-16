@@ -34,7 +34,7 @@ int get_op(unsigned int line_number)
 		}
 	}
 	{
-		fprintf(stderr, "L%d: unknown instruction %s",
+		fprintf(stderr, "L%d: unknown instruction %s\n",
 			line_number, world.commands[0]);
 		free_stack();
 		fclose(world.input);
