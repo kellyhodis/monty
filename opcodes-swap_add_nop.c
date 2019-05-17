@@ -17,7 +17,7 @@ void op_swap(stack_t **stack, unsigned int line_number)
 	{
 		hold = (world.stack)->n;
 		(world.stack)->n = (world.stack)->prev->n;
-		(world.stack)->prev->n = hold; 
+		(world.stack)->prev->n = hold;
 	}
 	else
 	{
