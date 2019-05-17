@@ -17,7 +17,7 @@ void op_pchar(stack_t **stack, unsigned int line_num)
 			printf("%c\n", (world.stack)->n);
 		else
 		{
-			fprintf(stderr, "L%d: can't pchar, value out of range\n",
+			fprintf(stderr, "L%u: can't pchar, value out of range\n",
 				line_num);
 			free_stack();
 			fclose(world.input);
@@ -26,7 +26,7 @@ void op_pchar(stack_t **stack, unsigned int line_num)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: can't pchar, stack empty\n",
+		fprintf(stderr, "L%u: can't pchar, stack empty\n",
 			line_num);
 		free_stack();
 		fclose(world.input);

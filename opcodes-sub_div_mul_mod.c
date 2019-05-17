@@ -19,7 +19,7 @@ void op_sub(stack_t **stack, unsigned int line_num)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n", line_num);
+		fprintf(stderr, "L%u: can't sub, stack too short\n", line_num);
 		fclose(world.input);
 		free_stack();
 		exit(EXIT_FAILURE);
@@ -46,9 +46,9 @@ void op_div(stack_t **stack, unsigned int line_num)
 	else
 	{
 		if (!(*stack)->prev)
-			fprintf(stderr, "L%d: can't div, stack too short\n", line_num);
+			fprintf(stderr, "L%u: can't div, stack too short\n", line_num);
 		else if ((*stack)->n == 0)
-			fprintf(stderr, "L%d: division by zero\n", line_num);
+			fprintf(stderr, "L%u: division by zero\n", line_num);
 		free_stack();
 		fclose(world.input);
 		exit(EXIT_FAILURE);
@@ -74,7 +74,7 @@ void op_mul(stack_t **stack, unsigned int line_num)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: can't mul, stack too short\n", line_num);
+		fprintf(stderr, "L%u: can't mul, stack too short\n", line_num);
 		/* free element if it exists */
 		exit(EXIT_FAILURE);
 	}
@@ -99,7 +99,7 @@ void op_mod(stack_t **stack, unsigned int line_num)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: can't mod, stack too short\n", line_num);
+		fprintf(stderr, "L%u: can't mod, stack too short\n", line_num);
 		/* free element if it exists */
 		exit(EXIT_FAILURE);
 	}

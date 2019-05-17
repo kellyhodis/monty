@@ -39,7 +39,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 	if (isdigit(world.commands[1][0]) == 0 && world.commands[1][0] != '-')
 	{
 		free(new);
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit_program();
 	}
 	for (i = 1; world.commands[1][i]; i++)
@@ -47,7 +47,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 		if (isdigit(world.commands[1][i]) == 0)
 		{
 			free(new);
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
 			exit_program();
 		}
 	}
@@ -57,7 +57,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 	else
 	{
 		new->prev = world.stack;
-		new->prev->next = new;
+		(world.stack)->next = new;
 	}
 	world.stack = new;
 }
@@ -99,7 +99,7 @@ void op_pint(stack_t **stack, unsigned int line_number)
 	else
 	{
 		fclose(world.input);
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -131,7 +131,7 @@ void op_pop(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
 		fclose(world.input);
 		exit(EXIT_FAILURE);
 	}

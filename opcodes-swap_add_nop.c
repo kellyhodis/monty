@@ -21,7 +21,7 @@ void op_swap(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
 		fclose(world.input);
 		free_stack();
 		exit(EXIT_FAILURE);
@@ -46,8 +46,8 @@ void op_add(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-		/* free stack element if there is one */
+		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		free_stack();
 		exit(EXIT_FAILURE);
 	}
 

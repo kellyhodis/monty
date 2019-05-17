@@ -39,13 +39,12 @@ int get_op(unsigned int line_number)
 			return (0);
 		}
 	}
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n",
-			line_number, world.commands[0]);
-		free_stack();
-		fclose(world.input);
-		exit(EXIT_FAILURE);
-	}
+
+	fprintf(stderr, "L%u: unknown instruction %s\n",
+		line_number, world.commands[0]);
+	free_stack();
+	fclose(world.input);
+	exit(EXIT_FAILURE);
 	return (0);
 }
 
