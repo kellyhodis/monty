@@ -36,18 +36,20 @@ void op_sub(stack_t **stack, unsigned int line_num)
 
 void op_div(stack_t **stack, unsigned int line_num)
 {
-	if (*stack && (*stack)->prev && (*stack)->n != 0)
+	int num;
+
+	(void)stack;
+	if (world.stack && (world.stack)->prev && (world.stack)->n != 0)
 	{
-		(*stack)->prev->n = (*stack)->prev->n / (*stack)->n;
-		*stack = (*stack)->prev;
-		free((*stack)->next);
-		(*stack)->next = NULL;
+		num = ((world.stack)->prev->n) / ((world.stack)->n);
+		op_pop(&world.stack, line_num);
+		(world.stack)->n = num;
 	}
 	else
 	{
-		if (!(*stack)->prev)
+		if (world.stack == NULL || world.stack->prev == NULL)
 			fprintf(stderr, "L%u: can't div, stack too short\n", line_num);
-		else if ((*stack)->n == 0)
+		else if ((world.stack)->n == 0)
 			fprintf(stderr, "L%u: division by zero\n", line_num);
 		free_stack();
 		fclose(world.input);
@@ -99,8 +101,13 @@ void op_mod(stack_t **stack, unsigned int line_num)
 	}
 	else
 	{
-		fprintf(stderr, "L%u: can't mod, stack too short\n", line_num);
-		/* free element if it exists */
+		if ((*stack)->n == 0)
+			fprintf(stderr, "L%u: division by zero\n", line_num);
+		else
+			fprintf(stderr, "L%u: can't mod, stack too short\n",
+				line_num);
+		free_stack();
+		fclose(world.input);
 		exit(EXIT_FAILURE);
 	}
 }
