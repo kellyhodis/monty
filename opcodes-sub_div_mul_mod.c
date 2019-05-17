@@ -101,7 +101,7 @@ void op_mod(stack_t **stack, unsigned int line_num)
 	}
 	else
 	{
-		if ((*stack)->n == 0)
+		if (*stack && (*stack)->prev && (*stack)->n == 0)
 			fprintf(stderr, "L%u: division by zero\n", line_num);
 		else
 			fprintf(stderr, "L%u: can't mod, stack too short\n",
