@@ -51,12 +51,12 @@ int main(int argc, char **argv)
 	int i;
 	FILE *input;
 
-	if (argc == 1)
+	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	if (argc == 2)
+	else
 	{
 		input = fopen(argv[1], "r");
 		if (input == NULL)
