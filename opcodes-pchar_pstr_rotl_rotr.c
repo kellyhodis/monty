@@ -81,7 +81,6 @@ void op_pstr(stack_t **stack, unsigned int line_num)
 void op_rotl(stack_t **stack, unsigned int line_num)
 {
 	stack_t *run, *hold;
-	int count = 0;
 
 	(void)stack;
 	(void)line_num;
@@ -91,10 +90,7 @@ void op_rotl(stack_t **stack, unsigned int line_num)
 		hold = world.stack;
 		run = (world.stack)->prev;
 		while (hold->prev)
-		{
-			count++;
 			hold = hold->prev;
-		}
 		run->next->prev = NULL;
 		hold->prev = run->next;
 		hold->prev->next = hold;
@@ -103,5 +99,32 @@ void op_rotl(stack_t **stack, unsigned int line_num)
 	}
 }
 
+/**
+ * op_rotr - rotates stack to bottom
+ * @stack: stack
+ * @line_num: current line number in program
+ *
+ * Return: nothing
+ */
 
+void op_rotr(stack_t **stack, unsigned int line_num)
+{
+	stack_t *run, *hold;
+	
+	(void)stack;
+	(void)line_num;
+
+	if (world.stack && (world.stack)->prev)
+	{
+		hold = world.stack;
+		run = world.stack;
+		while (hold->prev)
+			hold = hold->prev;
+		hold->prev = run;
+		hold->next->prev = NULL;
+		hold->next = NULL;
+		run->next = hold;
+		world.stack = hold;
+	}
+}
 
