@@ -41,7 +41,6 @@ void op_pchar(stack_t **stack, unsigned int line_num)
  *
  * Return: nothing
  */
-
 void op_pstr(stack_t **stack, unsigned int line_num)
 {
 	char str[50];
@@ -81,27 +80,26 @@ void op_pstr(stack_t **stack, unsigned int line_num)
 
 void op_rotl(stack_t **stack, unsigned int line_num)
 {
-	stack_t *run;
+	stack_t *run, *hold;
+	int count = 0;
 
 	(void)stack;
 	(void)line_num;
 
-	if (world.stack)
+	if (world.stack && (world.stack)->prev)
 	{
-		run = world.stack;
-		while (run->prev)
+		hold = world.stack;
+		run = (world.stack)->prev;
+		while (hold->prev)
 		{
-			run = run->prev;
-			run->next->prev = run->next->next;
-			run->next->next = run;
-			if (run->prev == NULL)
-			{
-				run->prev = run->next;
-				run->next = NULL;
-				world.stack = run;
-				break;
-			}
+			count++;
+			hold = hold->prev;
 		}
+		run->next->prev = NULL;
+		hold->prev = run->next;
+		hold->prev->next = hold;
+		run->next = NULL;
+		world.stack = run;
 	}
 }
 
