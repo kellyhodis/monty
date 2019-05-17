@@ -75,5 +75,6 @@ void op_rotr(stack_t **stack, unsigned int line_number);
 void add_node(int n);
 void remove_node(void);
 void free_stack(void);
+void exit_program(void);
 
 #endif /* MONTY_H */

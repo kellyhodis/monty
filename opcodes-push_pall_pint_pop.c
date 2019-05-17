@@ -1,5 +1,19 @@
 #include "monty.h"
 struct_t world;
+
+/**
+ * exit_program - performs exiting functions
+ *
+ * Return: nothing
+ */
+
+void exit_program(void)
+{
+	free_stack();
+	fclose(world.input);
+	exit(EXIT_FAILURE);
+}
+
 /**
 * op_push - pushes an element to the stack
 * @stack: stack to push element to
@@ -17,30 +31,24 @@ void op_push(stack_t **stack, unsigned int line_number)
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
-		free_stack();
-		fclose(world.input);
 		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		exit_program();
 	}
 
 	new->next = NULL;
 	if (isdigit(world.commands[1][0]) == 0 && world.commands[1][0] != '-')
 	{
 		free(new);
-		free_stack();
-		fclose(world.input);
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_program();
 	}
 	for (i = 1; world.commands[1][i]; i++)
 	{
 		if (isdigit(world.commands[1][i]) == 0)
 		{
 			free(new);
-			free_stack();
-			fclose(world.input);
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
+			exit_program();
 		}
 	}
 	new->n = atoi(world.commands[1]);
