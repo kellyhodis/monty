@@ -71,5 +71,39 @@ void op_pstr(stack_t **stack, unsigned int line_num)
 		printf("\n");
 }
 
+/**
+ * op_rotl - rotates the stack to the top
+ * @stack: stack
+ * @line_num: current line number in program
+ *
+ * Return: nothing
+ */
+
+void op_rotl(stack_t **stack, unsigned int line_num)
+{
+	stack_t *run;
+
+	(void)stack;
+	(void)line_num;
+
+	if (world.stack)
+	{
+		run = world.stack;
+		while (run->prev)
+		{
+			run = run->prev;
+			run->next->prev = run->next->next;
+			run->next->next = run;
+			if (run->prev == NULL)
+			{
+				run->prev = run->next;
+				run->next = NULL;
+				world.stack = run;
+				break;
+			}
+		}
+	}
+}
+
 
 
