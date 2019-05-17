@@ -110,7 +110,7 @@ void op_rotl(stack_t **stack, unsigned int line_num)
 void op_rotr(stack_t **stack, unsigned int line_num)
 {
 	stack_t *run, *hold;
-	
+
 	(void)stack;
 	(void)line_num;
 
